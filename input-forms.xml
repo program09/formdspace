@@ -1,0 +1,2140 @@
+<?xml version="1.0"?>
+<!DOCTYPE input-forms SYSTEM "input-forms.dtd">
+<input-forms>
+	<!-- The form-map maps collection handles to forms. DSpace does not       -->
+	<!-- require that a collection's name be unique, even within a community .-->
+	<!-- DSpace does however insure that each collection's handle is unique.  -->
+	<!-- Form-map provides the means to associate a unique collection name    -->
+	<!-- with a form. The form-map also provides the special handle "default" -->
+	<!-- (which is never a collection), here mapped to "traditional". Any     -->
+	<!-- collection which does not appear in this map will be associated with -->
+	<!-- the mapping for handle "default".                                    -->
+	<form-map>
+		<name-map collection-handle="default" form-name="traditional" />
+		<!-- 
+ 	we provide examples of form tailored for articles, books, 
+   	conference_materials, dataset and a catch all others form-name 
+   <name-map collection-handle="123456789/2" form-name="articles" /><name-map collection-handle="123456789/3" form-name="conference_materials" /><name-map collection-handle="123456789/4" form-name="books" /><name-map collection-handle="123456789/5" form-name="datasets" /><name-map collection-handle="123456789/6" form-name="others" />
+ -->
+	</form-map>
+	<!-- The form-definitions map lays out the detailed definition of all the -->
+	<!-- submission forms.Each separate form set has a unique name as an      -->
+	<!-- attribute. This name matches one of the names in the form-map. One   -->
+	<!-- named form set has the name "traditional"; as this name suggests,    -->
+	<!-- it is the old style and is also the default, which gets used when    -->
+	<!-- the specified collection has no correspondingly named form set.      -->
+	<!--                                                                      -->
+	<!-- Each form set contains an ordered set of pages; each page defines    -->
+	<!-- one submission metadata entry screen. Each page has an ordered list  -->
+	<!-- of field definitions, Each field definition corresponds to one       -->
+	<!-- metatdata entry (a so-callsubjectfile:///C:/Users/yordi/OneDrive/Documentos/VERSI%C3%93N%20FINAL%20-%20GUIA%20ALICIA%202.0.1%20-%20ENERO%202021.pdfed row), which has a DC element name, a    -->
+	<!-- displayed label, a text string prompt which is called a hint , and   -->
+	<!-- an input-type. Each field also may hold optional elements: DC        -->
+	<!-- qualifier name, a repeatable flag, and a text string whose presence  -->
+	<!-- serves as a 'this field is required' flag.                           -->
+	<form-definitions>
+		<form name="traditional">
+			<page number="1">
+
+				<!-- cd.type (Obligatorio - no repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>type</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Tipo de publicación (dc.type)</label>
+					<input-type value-pairs-name="common_types">dropdown</input-type>
+					<hint>Seleccione el tipo de publicación. </hint>
+					<required>Debe seleccionar el tipo de publicación</required>
+				</field>
+
+				<!--dc.type.version (Recomendado - no repetible)
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>type</dc-element>
+					<dc-qualifier>version</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Versión de la publicación (dc.type.version)</label>
+					<input-type value-pairs-name="common_version">dropdown</input-type>
+					<hint>Seleccione la versión de la publicación</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>format</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Formato (dc.format)</label>
+					<input-type value-pairs-name="common_format">dropdown</input-type>
+					<hint>Seleccione el formato de la publicación</hint>
+					<required>Debe seleccionar el formato de la publicación</required>
+				</field>
+				-->
+
+				<!--dc.language.iso (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>language</dc-element>
+					<dc-qualifier>iso</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Idioma * (dc.language.iso)</label>
+					<input-type value-pairs-name="common_iso_languages">dropdown</input-type>
+					<hint>Seleccione el idioma de la obra</hint>
+					<required>Debe seleccionar el idioma del documento</required>
+				</field>
+
+				<!--dc.contributor.author (obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>author</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Autores * (dc.contributor.author)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese los autores en el orden Apellido(s), Nombre(es) [por ejemplo, Smith, Josh o Smith, J] según indique la fuente.</hint>
+					<required>Ingrese los nombres de los autores</required>
+				</field>
+
+				<!--renati.author (dni, cext, pasaporte, cedula)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>author</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Tipo de Documento de Identidad del Autor * (renati.author.[dni, cext, pasaporte, cedula])</label>
+					<input-type value-pairs-name="renati_author_identifier">qualdrop_value</input-type>
+					<hint>Obligatorio para grados y títulos</hint>
+					<required></required>
+				</field>
+
+				<!--dc.contributor.advisor (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>advisor</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Asesor * (dc.contributor.advisor)</label>
+					<input-type>onebox</input-type>
+					<hint>Obligatorio para tesis conducentes a grados académicos. Ingrese al(los) asesore(s) en el orden Apellido(s), Nombre(es) [por ejemplo, Smith, Josh o Smith, J] según indique la fuente.</hint>
+					<required>true</required>
+				</field>
+
+				<!--renati.advisor.[dni,cext,pasaporte, cedula]-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>advisor</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Tipo de Documento de Identidad del Asesor * (renati.advisor.[dni, cext, pasaporte, cedula])</label>
+					<input-type value-pairs-name="renati_advisor_identifier">qualdrop_value</input-type>
+					<hint>Seleccione el tipo de documento e ingrese los dígitos.</hint>
+					<required></required>
+				</field>
+
+				<!--renati.advisor.orcid (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>advisor</dc-element>
+					<dc-qualifier>orcid</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>ORCID del asesor * (renati.advisor.orcid)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el identificador ORCID del Asesor de esta publicación</hint>
+					<required></required>
+				</field>
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>contributor</dc-element>
+					<dc-qualifier>editor</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Editores (dc.contributor.editor)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese los responsables de la edición en el orden Apellido(s), Nombre(es) [por ejemplo, Smith, Josh o Smith, J] según indique la fuente.</hint>
+					<required></required>
+				</field>
+				-->
+
+
+				<!-- dc.title (Obligatorio - No repetible) -->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>title</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Título * (dc.title)</label>
+					<input-type>onebox</input-type>
+					<hint>Título del elemento</hint>
+					<required>Debe ingresar el título para este elemento</required>
+				</field>
+
+				<!--dc.title.alternative (OPCIONAL - repetible)
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>title</dc-element>
+					<dc-qualifier>alternative</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Título Alternativo (dc.title.alternative)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el título título alternativo, separando subtítulos mediante dos puntos. Coincide estrictamente las normas de ortografía.</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!-- dc.publisher (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>publisher</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Editorial * (dc.publisher)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese al responsable de la disponibilidad del recurso [por ejemplo: Universidad Nacional Mayor de San Marcos. Fondo Editorial]</hint>
+					<required>true</required>
+				</field>
+
+				<!--dc.publisher.country (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>publisher</dc-element>
+					<dc-qualifier>country</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>País de publicación * (dc.publisher.country)</label>
+					<input-type value-pairs-name="common_publisher">dropdown</input-type>
+					<hint>Obligatorio para grados y títulos.</hint>
+					<required>true</required>
+				</field>
+
+				<!--dc.date.issued (Obligatorio - No repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>date</dc-element>
+					<dc-qualifier>issued</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Fecha de publicación * (dc.date.issued)</label>
+					<input-type>date</input-type>
+					<hint>Ingrese la fecha que se indica en la fuente impresa o digital según ISO 8601 [YYYY-MM-DD]</hint>
+					<required>Debe ingresar la fecha de publicación del recurso</required>
+				</field>
+
+				<!--dc-right (Obligatorio - no repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>rights</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Nivel de acceso * (dc.rights)</label>
+					<input-type value-pairs-name="common_rights">dropdown</input-type>
+					<hint>Seleccione el nivel de acceso</hint>
+					<required>Debe seleccionar el nivel de acceso</required>
+				</field>
+
+				<!--dc.rights.uri (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>rights</dc-element>
+					<dc-qualifier>uri</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Condición de licencia (dc.rights.uri)</label>
+					<input-type>onebox</input-type>
+					<hint>Seleccione la condición de licencia</hint>
+					<required></required>
+				</field>
+
+				<!--dc.date.embargoEnd (Opcional si es aplicable - no repetible)
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>date</dc-element>
+					<dc-qualifier>embargoEnd</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Fecha de fin de embargo (dc.date.embargoEnd)</label>
+					<input-type>date</input-type>
+					<hint>Ingrese la fecha de fin de embargo en formato ISO-88601</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>source</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Fuente (dc.source)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingresar la fuente impresa de donde se deriva el recurso.</hint>
+					<required></required>
+				</field>
+				-->
+				
+				<!--dc.description.abstract (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>abstract</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Resumen * (dc.description.abstract)</label>
+					<input-type>textarea</input-type>
+					<hint>Ingrese el extracto o síntesis de la publicación considerando estrictamente las normas ortográficas.</hint>
+					<required>Registrar el extracto o síntesis de la publicación</required>
+				</field>
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>tableofcontents</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Índice (dc.description.tableOfContents)</label>
+					<input-type>textarea</input-type>
+					<hint>Ingrese la tabla de contenidos</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>citation</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Cita bibliográfica (dc.identifier.citation)</label>
+					<input-type>textarea</input-type>
+					<hint>Ingrese la cita bibliografica integra, bajo la adopción de un estándar</hint>
+					<required></required>
+				</field>
+				-->
+
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>uri</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Recurso relacionado (dc.relation.uri)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el identificador de un recurso relacionado a la publicación</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--dc.subject (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>subject</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Materia * (dc.subject)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese las palabras claves y/o descriptores </hint>
+					<required>Debe ingresar al menos una palabra clave</required>
+				</field>
+
+				<!--dc.subject.ocde (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>subject</dc-element>
+					<dc-qualifier>ocde</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Campo del conocimiento OCDE * (dc.subject.ocde)</label>
+					<input-type value-pairs-name="dc_subject_ocde">dropdown</input-type>
+					<hint>Seleccione el código de clasificación OCDE de la obra</hint>
+					<required>Debe seleccionar al menos un código</required>
+				</field>
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>doi</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Identificador DOI (dc.identifier.doi)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el identificador DOI asociado a la publicación</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>identifier</dc-element>
+					<dc-qualifier>isbn</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Identificador ISBN (dc.identifier.isbn)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el identificador ISBN asociado a la publicación</hint>
+					<required></required>
+				</field>
+				-->
+
+				<!--
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>relation</dc-element>
+					<dc-qualifier>ispartof</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Recurso del cual forma parte (dc.relation.isPartOf)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el identificador de la publicación en el que el recurso descrito se incluye física o logicamente</hint>
+					<required></required>
+				</field>
+				-->
+				
+				<!--renati.type (Obligatorio - no repetible)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>type</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Tipo de trabajo de investigación * (renati.type)</label>
+					<input-type value-pairs-name="renati_type_identifier">dropdown</input-type>
+					<hint>Seleccione el tipo de trabajo de investigación (tesis).</hint>
+					<required></required>
+				</field>
+
+				<!--thesis.degree.name (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>thesis</dc-schema>
+					<dc-element>degree</dc-element>
+					<dc-qualifier>name</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Nombre del grado * (thesis.degree.name)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el nombre del grado del estudiante asociado con el trabajo de investigacion.</hint>
+					<required></required>
+				</field>
+
+				<!--renati.level (Obligatorio - no repetible)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>level</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Grado académico o título profesional * (renati.level)</label>
+					<input-type value-pairs-name="renati_level_identifier">dropdown</input-type>
+					<hint>Seleccione el tipo de grado académico o del título profesional otorgado en el Perú, según el reglamento RENATI</hint>
+					<required></required>
+				</field>
+
+				<!--thesis.degree.dicipline (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>thesis</dc-schema>
+					<dc-element>degree</dc-element>
+					<dc-qualifier>discipline</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Nombre del programa * (thesis.degree.discipline)</label>
+					<input-type>onebox</input-type>
+					<hint>Obligatorio para trabajos de investigación conducentes a grados y títulos. Ingrese el nombre del programa de educación superior conducente al grado académico y/o título profesional</hint>
+					<required></required>
+				</field>
+
+				<!--renati.dicipline (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>discipline</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Código del programa * (renati.discipline)</label>
+					<input-type>onebox</input-type>
+					<hint>Obligatorio para trabajos de investigación conducentes a grados y títulos. Ingrese la clasificación del programa de educación superior conducente al grado académico y/o título profesional.</hint>
+					<required></required>
+				</field>
+
+				<!--thesis.degree.grator (Obligatorio - no repetible)-->
+				<field>
+					<dc-schema>thesis</dc-schema>
+					<dc-element>degree</dc-element>
+					<dc-qualifier>grantor</dc-qualifier>
+					<repeatable>false</repeatable>
+					<label>Institución otorgante del grado * (thesis.degree.grantor)</label>
+					<input-type>onebox</input-type>
+					<hint>Ingrese el nombre completo de la institucion y el departamento o area responsable</hint>
+					<required></required>
+				</field>
+
+				<!--renati.juror (Obligatorio - repetible)-->
+				<field>
+					<dc-schema>renati</dc-schema>
+					<dc-element>juror</dc-element>
+					<dc-qualifier></dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Jurado * (renati.juror)</label>
+					<input-type>onebox</input-type>
+					<hint>Obligatorio para tesis conducentes a grados académicos.</hint>
+					<required></required>
+				</field>
+
+				<!--dc.description.sponsorship (Opcional - repetible)
+				<field>
+					<dc-schema>dc</dc-schema>
+					<dc-element>description</dc-element>
+					<dc-qualifier>sponsorship</dc-qualifier>
+					<repeatable>true</repeatable>
+					<label>Patrocinio (dc.description.sponsorship)</label>
+					<input-type>onebox</input-type>
+					<hint></hint>
+					<required></required>
+				</field>
+				-->
+			<!--
+	       <field>
+			 <dc-schema>dc</dc-schema>
+	         <dc-element>relation</dc-element>
+	         <repeatable>true</repeatable>
+	         <label>Nombre del Proyecto</label>
+	         <input-type>onebox</input-type>
+	         <hint>Ingrese el nombre del proyecto, si lo hubiera, que haya producido esta publicación. </hint>
+	         <required></required>
+	       </field>
+		   -->  
+
+	       <!--
+	       <field>
+			 <dc-schema>dc</dc-schema>
+	         <dc-element>relation</dc-element>
+	         <dc-qualifier>ispartof</dc-qualifier>
+	         <repeatable>false</repeatable>
+	         <label>Nombre de la Revista</label>
+	         <input-type>onebox</input-type>
+	         <hint>Ingrese el nombre de la revista donde el artículo ha sido publicado, si lo hubiera.</hint>
+	         <required></required>
+	       </field>
+		   -->	
+	       	   
+     		</page>
+		</form>
+	</form-definitions>
+	<!-- form-value-pairs populate dropdown and qualdrop-value lists.          -->
+	<!-- The form-value-pairs element holds child elements named 'value-pairs' -->
+	<!-- A 'value-pairs' element has a value-pairs-name and a dc-term          -->
+	<!-- attribute. The dc-term attribute specifies which to which Dublin Core -->
+	<!-- Term this set of value-pairs applies.                                 -->
+	<!--     Current dc-terms are: identifier-pairs, type-pairs, and           -->
+	<!--     language_iso-pairs. The name attribute matches a name             -->
+	<!--     in the form-map, above.                                           -->
+	<!-- A value-pair contains one 'pair' for each value displayed in the list -->
+	<!-- Each pair contains a 'displayed-value' element and a 'stored-value'   -->
+	<!-- element. A UI list displays the displayed-values, but the program     -->
+	<!-- stores the associated stored-values in the database.                  -->
+	<form-value-pairs>
+		<value-pairs value-pairs-name="sale_info" dc-term="sale">
+			<pair>
+				<displayed-value>Not for sale</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Anyone can buy</displayed-value>
+				<stored-value>Anonymous</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>First Membership</displayed-value>
+				<stored-value>First Membership</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Second Membership</displayed-value>
+				<stored-value>Second Membership</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_identifiers" dc-term="identifier">
+			<pair>
+				<displayed-value>DOI</displayed-value>
+				<stored-value>doi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Scopus ID</displayed-value>
+				<stored-value>scopus</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>WOS ID</displayed-value>
+				<stored-value>isi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pubmed ID</displayed-value>
+				<stored-value>pmid</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>arXiv ID</displayed-value>
+				<stored-value>arxiv</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>ISSN</displayed-value>
+				<stored-value>issn</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Other</displayed-value>
+				<stored-value>other</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>ISMN</displayed-value>
+				<stored-value>ismn</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Gov't Doc #</displayed-value>
+				<stored-value>govdoc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>URI</displayed-value>
+				<stored-value>uri</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>ISBN</displayed-value>
+				<stored-value>isbn</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_article_identifiers" dc-term="identifier">
+			<pair>
+				<displayed-value>DOI</displayed-value>
+				<stored-value>doi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Scopus ID</displayed-value>
+				<stored-value>scopus</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>WOS ID</displayed-value>
+				<stored-value>isi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pubmed ID</displayed-value>
+				<stored-value>pmid</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>arXiv ID</displayed-value>
+				<stored-value>arxiv</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Gov't Doc #</displayed-value>
+				<stored-value>govdoc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>URI</displayed-value>
+				<stored-value>uri</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_book_identifiers" dc-term="identifier">
+			<pair>
+				<displayed-value>ISBN</displayed-value>
+				<stored-value>isbn</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>DOI</displayed-value>
+				<stored-value>doi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Scopus ID</displayed-value>
+				<stored-value>scopus</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>WOS ID</displayed-value>
+				<stored-value>isi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pubmed ID</displayed-value>
+				<stored-value>pmid</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>arXiv ID</displayed-value>
+				<stored-value>arxiv</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Gov't Doc #</displayed-value>
+				<stored-value>govdoc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>URI</displayed-value>
+				<stored-value>uri</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_conference_material_identifiers" dc-term="identifier">
+			<pair>
+				<displayed-value>ISBN</displayed-value>
+				<stored-value>isbn</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>DOI</displayed-value>
+				<stored-value>doi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Scopus ID</displayed-value>
+				<stored-value>scopus</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>WOS ID</displayed-value>
+				<stored-value>isi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pubmed ID</displayed-value>
+				<stored-value>pmid</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>arXiv ID</displayed-value>
+				<stored-value>arxiv</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Gov't Doc #</displayed-value>
+				<stored-value>govdoc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>URI</displayed-value>
+				<stored-value>uri</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_dataset_identifiers" dc-term="identifier">
+			<pair>
+				<displayed-value>DOI</displayed-value>
+				<stored-value>doi</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>ARK</displayed-value>
+				<stored-value>ark</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pubmed ID</displayed-value>
+				<stored-value>pmid</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>arXiv ID</displayed-value>
+				<stored-value>arxiv</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Gov't Doc #</displayed-value>
+				<stored-value>govdoc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>URI</displayed-value>
+				<stored-value>uri</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_format" dc-term="format">
+			<pair>
+				<displayed-value>PDF</displayed-value>
+				<stored-value>application/pdf</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>WORD</displayed-value>
+				<stored-value>application/msword</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>HTML</displayed-value>
+				<stored-value>application/html</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_types" dc-term="type">
+			<pair>
+				<displayed-value>Artículo</displayed-value>
+				<stored-value>info:eu-repo/semantics/article</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Tesis de pregrado</displayed-value>
+				<stored-value>info:eu-repo/semantics/bachelorThesis</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Tesis de maestria</displayed-value>
+				<stored-value>info:eu-repo/semantics/masterThesis</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Tesis de doctorado</displayed-value>
+				<stored-value>info:eu-repo/semantics/doctoralThesis</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Monografia</displayed-value>
+				<stored-value>info:eu-repo/semantics/monograph</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Reporte</displayed-value>
+				<stored-value>info:eu-repo/semantics/report</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Libro</displayed-value>
+				<stored-value>info:eu-repo/semantics/book</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Parte de un libro</displayed-value>
+				<stored-value>info:eu-repo/semantics/bookPart</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Revisión</displayed-value>
+				<stored-value>info:eu-repo/semantics/review</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Conferencia</displayed-value>
+				<stored-value>info:eu-repo/semantics/conferenceObject</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Presentación</displayed-value>
+				<stored-value>info:eu-repo/semantics/lecture</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Artículo preliminar</displayed-value>
+				<stored-value>info:eu-repo/semantics/workingPaper</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Artículo antes de ser publicado</displayed-value>
+				<stored-value>info:eu-repo/semantics/preprint</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Artículo de prensa</displayed-value>
+				<stored-value>info:eu-repo/semantics/contributionToPeriodical</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Documentos internos</displayed-value>
+				<stored-value>Documentos internos</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Proyectos Escolares</displayed-value>
+				<stored-value>Proyectos Escolares</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Imagen</displayed-value>
+				<stored-value>info:eu-repo/semantics/image</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Documentos Técnicos</displayed-value>
+				<stored-value>info:eu-repo/semantics/technicalDocumentation</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="article_types" dc-term="type">
+			<pair>
+				<displayed-value>Artículo</displayed-value>
+				<stored-value>info:eu-repo/semantics/article</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="book_types" dc-term="type">
+			<pair>
+				<displayed-value>Libro</displayed-value>
+				<stored-value>info:eu-repo/semantics/book</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="conference_material_types" dc-term="type">
+			<pair>
+				<displayed-value>Conference Proceeding</displayed-value>
+				<stored-value>Conference Proceeding</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Conference Paper</displayed-value>
+				<stored-value>Conference Paper</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Presentación</displayed-value>
+				<stored-value>info:eu-repo/semantics/lecture</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Poster</displayed-value>
+				<stored-value>Poster</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="dataset_types" dc-term="type">
+			<pair>
+				<displayed-value>Dataset</displayed-value>
+				<stored-value>Dataset</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_rights" dc-term="rights">
+			<pair>
+				<displayed-value>Acceso Abierto</displayed-value>
+				<stored-value>info:eu-repo/semantics/openAccess</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Acceso Restringido</displayed-value>
+				<stored-value>info:eu-repo/semantics/restrictedAccess</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Acceso embargado</displayed-value>
+				<stored-value>info:eu-repo/semantics/embargoedAccess</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Acceso Cerrado</displayed-value>
+				<stored-value>info:eu-repo/semantics/closedAccess</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_description" dc-term="description">
+			<pair>
+				<displayed-value>Tesis</displayed-value>
+				<stored-value>Tesis</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Tesis de segunda especialidad</displayed-value>
+				<stored-value>Tesis de segunda especialidad</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo de investigación</displayed-value>
+				<stored-value>Trabajo de investigación</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo de suficiencia profesional</displayed-value>
+				<stored-value>Trabajo de suficiencia profesional</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo académico</displayed-value>
+				<stored-value>Trabajo académico</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="common_degree" dc-term="degree">
+			<pair>
+				<displayed-value>Bachiller</displayed-value>
+				<stored-value>Bachiller</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Título Profesional</displayed-value>
+				<stored-value>Título Profesional</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Título de Segunda Especialidad</displayed-value>
+				<stored-value>Título de Segunda Especialidad</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Maestría</displayed-value>
+				<stored-value>Maestría</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Doctorado</displayed-value>
+				<stored-value>Doctorado</stored-value>
+			</pair>
+		</value-pairs>
+		<!-- default language order: (from dspace 1.2.1)
+        "en_US", "en", "es", "de", "fr", "it", "ja", "zh", "other", ""
+     -->
+		<value-pairs value-pairs-name="common_iso_languages" dc-term="language_iso">
+			<pair>
+				<displayed-value>N/A</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+			<pair>
+				<displayed-value>English (United States)</displayed-value>
+				<stored-value>en_US</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Ingles</displayed-value>
+				<stored-value>eng</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Español</displayed-value>
+				<stored-value>spa</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>(Other)</displayed-value>
+				<stored-value>other</stored-value>
+			</pair>
+		</value-pairs>
+
+		<value-pairs value-pairs-name="common_version" dc-term="degree">
+			<pair>
+				<displayed-value>Borrador</displayed-value>
+				<stored-value>info:eu-repo/semantics/draft</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Versión enviada (preprint)</displayed-value>
+				<stored-value>info:eu-repo/semantics/submittedVersion</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Versión aceptada (postprint)</displayed-value>
+				<stored-value>info:eu-repo/semantics/acceptedVersion</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Versión publicada</displayed-value>
+				<stored-value>info:eu-repo/semantics/publishedVersion</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Versión actualizada</displayed-value>
+				<stored-value>info:eu-repo/semantics/updatedVersion</stored-value>
+			</pair>
+		</value-pairs>
+
+		<value-pairs value-pairs-name="common_publisher" dc-term="publisher">
+			<pair>
+				<displayed-value>Peru</displayed-value>
+				<stored-value>PE</stored-value>
+			</pair>
+		</value-pairs>
+
+		<value-pairs value-pairs-name="renati_type_identifier" dc-term="type">
+					<pair>
+				<displayed-value>(Vacío)</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Tesis</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/type#tesis</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo de investigación</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/type#trabajoDeInvestigacion</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo de suficiencia profesional</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/type#trabajoDeSuficienciaProfesional</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Trabajo académico</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/type#trabajoAcademico</stored-value>
+			</pair>
+		</value-pairs>
+
+		<value-pairs value-pairs-name="renati_level_identifier" dc-term="level">
+		     <pair>
+				<displayed-value>(Vacío)</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Bachiller</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/nivel#bachiller</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Título profesional</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/nivel#tituloProfesional</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Segunda especialidad</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/nivel#tituloSegundaEspecialidad</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Maestro</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/nivel#maestro</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Doctor</displayed-value>
+				<stored-value>https://purl.org/pe-repo/renati/nivel#doctor</stored-value>
+			</pair>
+		</value-pairs>
+		
+		<value-pairs value-pairs-name="renati_author_identifier" dc-term="author">
+			<pair>
+				<displayed-value>DNI</displayed-value>
+				<stored-value>dni</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>CE-Carné de extranjería</displayed-value>
+				<stored-value>cext</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pasaporte</displayed-value>
+				<stored-value>pasaporte</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Cédula de identidad</displayed-value>
+				<stored-value>cedula</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="renati_advisor_identifier" dc-term="advisor">
+			<pair>
+				<displayed-value>DNI</displayed-value>
+				<stored-value>dni</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>CE-Carné de extranjería</displayed-value>
+				<stored-value>cext</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Pasaporte</displayed-value>
+				<stored-value>pasaporte</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>Cédula de identidad</displayed-value>
+				<stored-value>cedula</stored-value>
+			</pair>
+		</value-pairs>
+		
+		<value-pairs value-pairs-name="dc_subject_identifier" dc-term="subject">
+			<pair>
+				<displayed-value>DDC</displayed-value>
+				<stored-value>ddc</stored-value>
+			</pair>
+			<pair>
+				<displayed-value>LLC</displayed-value>
+				<stored-value>llc</stored-value>
+			</pair>
+		</value-pairs>
+		<value-pairs value-pairs-name="dc_subject_ocde" dc-term="subject">
+							<pair>
+				<displayed-value>(Vacío)</displayed-value>
+				<stored-value></stored-value>
+			</pair>
+                        <pair>
+                                <displayed-value>1.00.00 -- Ciencias naturales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.01.00 -- Matemáticas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.01.01 -- Matemáticas puras</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.01.02 -- Matemáticas aplicadas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.01.03 -- Estadísticas, Probabilidad</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.01.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.02.00 -- Informática y Ciencias de la Información</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.02.01 -- Ciencias de la computación</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.02.02 -- Ciencias de la información</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.02.03 -- Bioinformática</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.00 -- Física y Astronomía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.01 -- Física atómica, molecular y química</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.02 -- Física de la materia condensada</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.03 -- Física de partículas, Campos de la Física</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.04 -- Física nuclear</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.05 -- Física de plasmas y fluídos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.06 -- Óptica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.07 -- Acústica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.03.08 -- Astronomía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.03.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.00 -- Química</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.01 -- Química orgánica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.02 -- Química inorgánica, Química nuclear</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.03 -- Química física</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.04 -- Ciencia de los polímeros</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.05 -- Electroquímica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.06 -- Química coloidal</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.04.07 -- Química analítica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.04.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.00 -- Ciencias de la Tierra, Ciencias ambientales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.01 -- Geociencias, Multidisciplinar</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.02 -- Mineralogía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.03 -- Paleontología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.04 -- Geoquímica, Geofísica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.05 -- Geografía física</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.06 -- Geología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.07 -- Vulcanología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.08 -- Ciencias del medio ambiente</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.09 -- Meteorología y ciencias atmosféricas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.10 -- Investigación climática</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.10</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.05.11 -- Oceanografía, Hidrología, Recursos hídricos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.05.11</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.00 -- Biología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.01 -- Biología celular, Microbiología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.02 -- Virología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.03 -- Bioquímica, Biología molecular</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.04 -- Métodos de investigación bioquímica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.05 -- Micología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.06 -- Biofísica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.07 -- Genética, Herencia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.08 -- Biología reproductiva</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.09 -- Biología del desarrollo</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.10 -- Ciencias de las plantas, Botánica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.10</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.11 -- Zoología, Ornitología, Entomología, ciencias biológicas del comportamiento</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.11</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.12 -- Biología marina, Biología de agua dulce, Limnología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.12</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.13 -- Ecología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.13</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.14 -- Biofísica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.14</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.15 -- Biología (teórica, matemática, térmica, criobiología, ritmo biológico), Biología evolutiva</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.15</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.06.16 -- Otras temas de Biología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.06.16</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>1.07.00 -- Otras ciencias naturales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#1.07.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.00.00 -- Ingeniería, Tecnología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.00 -- Ingeniería civil</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.01 -- Ingeniería civil</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.02 -- Ingeniería arquitectónica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.03 -- Ingeniería de la construcción</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.04 -- Ingeniería estructural y municipal</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.01.05 -- Ingeniería del transporte</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.01.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.00 -- Ingeniería eléctrica, Ingeniería electrónica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.01 -- Ingeniería eléctrica, Ingeniería electrónica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.02 -- Robótica, Control automático</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.03 -- Sistemas de automatización, Sistemas de control</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.04 -- Ingeniería de sistemas y comunicaciones</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.05 -- Telecomunicaciones</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.02.06 -- Hardware, Arquitectura de computadoras</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.02.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.00 -- Ingeniería mecánica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.01 -- Ingeniería mecánica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.02 -- Mecánica aplicada</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.03 -- Termodinámica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.04 -- Ingeniería aeroespacial</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.05 -- Ingeniería relacionada con la energía nuclear</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.03.06 -- Ingeniería de audio, Análisis de confiabilidad</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.03.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.04.00 -- Ingeniería química</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.04.01 -- Ingeniería química</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.04.02 -- Ingeniería de procesos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.00 -- Ingeniería de materiales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.01 -- Ingeniería de materiales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.02 -- Cerámica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.03 -- Recubrimiento, Películas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.04 -- Compuestos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.05 -- Papel, Madera</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.06 -- Textiles</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.05.07 -- Incluidos colorantes sintéticos, Colores, Fibras</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.05.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.06.00 -- Ingeniería médica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.06.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.06.01 -- Ingeniería médica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.06.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.06.02 -- Tecnología médica de laboratorio (análisis de muestras, tecnologías para el diagnóstico)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.06.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.00 -- Ingeniería ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.01 -- Ingeniería ambiental y geológica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.02 -- Geotecnia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.03 -- Ingeniería del Petróleo, (combustibles, aceites), Energía, Combustibles</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.04 -- Sensores remotos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.05 -- Minería, Procesamiento de minerales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.06 -- Ingeniería marina, naves</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.07.07 -- Ingeniería oceanográfica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.07.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.08.00 -- Biotecnología ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.08.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.08.01 -- Biotecnología ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.08.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.08.02 -- Biorremediación, Biotecnologías de diagnóstico en la gestión ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.08.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.08.03 -- Ética relacionada con la biotecnología ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.08.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.09.00 -- Biotecnología industrial</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.09.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.09.01 -- Biotecnología industrial</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.09.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.09.02 -- Tecnologías de bioprocesamiento, Biocatálisis, Fermentación</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.09.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.09.03 -- Bioproductos (productos que se manufacturan usando biotecnología), biomateriales, bioplásticos, biocombustibles, materiales nuevos bioderivados, químicos finos bioredivados</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.09.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.10.00 -- Nano-tecnología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.10.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.10.01 -- Nano-materiales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.10.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.10.02 -- Nano-procesos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.10.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.11.00 -- Otras ingenierías, Otras tecnologías</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.11.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.11.01 -- Alimentos y bebidas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.11.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.11.02 -- Otras ingenierías y tecnologías</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.11.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.11.03 -- Ingeniería de producción</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.11.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>2.11.04 -- Ingeniería industrial</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#2.11.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.00.00 -- Ciencias médicas, Ciencias de la salud</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.00 -- Medicina básica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.01 -- Anatomía, Morfología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.02 -- Genética humana</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.03 -- Inmunología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.04 -- Neurociencias</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.05 -- Farmacología, Farmacia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.06 -- Química medicinal</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.07 -- Toxicología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.08 -- Fisiología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.01.09 -- Patología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.01.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.00 -- Medicina clínica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.01 -- Andrología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.02 -- Obstetricia, Ginecología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.03 -- Pediatría</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.04 -- Sistema cardiaco, Sistema cardiovascular</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.05 -- Enfermedad vascular periférica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.06 -- Hematología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.07 -- Sistema respiratorio</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.08 -- Cuidado crítico y de emergencia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.09 -- Anestesiología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.10 -- Ortopedía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.10</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.11 -- Cirugía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.11</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.12 -- Radiología, Medicina nuclear, Imágenes médicas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.12</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.13 -- Trasplante</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.13</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.14 -- Odontología, Cirugía oral, Medicina oral</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.14</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.15 -- Dermatología, Enfermedades venéreas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.15</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.16 -- Alergia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.16</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.17 -- Reumatología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.17</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.18 -- Endocrinología, Metabolismo (incluyendo diabetes, hormonas)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.18</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.19 -- Gastroenterología, Hepatología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.19</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.20 -- Urología, Nefrología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.20</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.21 -- Oncología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.21</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.22 -- Oftalmología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.22</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.23 -- Otorrinolaringología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.23</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.24 -- Psiquiatría</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.24</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.25 -- Neurología clínica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.25</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.26 -- Geriatría, Gerontología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.26</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.27 -- Medicina general, Medicina interna</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.27</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.28 -- Otros temas de medicina clínica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.28</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.02.29 -- Medicina integral, Medicina complementaria</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.02.29</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.00 -- Ciencias de la salud</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.01 -- Ciencias del cuidado de la salud y servicios (administración de hospitales, financiamiento)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.02 -- Políticas de salud, Servicios de salud</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.03 -- Enfermería</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.04 -- Nutrición, Dietética</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.05 -- Salud pública, Salud ambiental</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.06 -- Medicina tropical</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.07 -- Parasitología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.08 -- Enfermedades infecciosas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.09 -- Epidemiología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.10 -- Salud ocupacional</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.10</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.11 -- Ciencias del deporte y la aptitud física</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.11</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.12 -- Ciencias socio biomédicas (planificación familiar, salud sexual, efectos políticos y sociales de la investigación biomédica)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.12</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.13 -- Ética</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.13</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.03.14 -- Abuso de sustancias</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.03.14</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.00 -- Biotecnología médica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.01 -- Biotecnología relacionada con la salud</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.02 -- Tecnologías que implican la manipulación de células, tejidos, órganos o todo el organismo</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.03 -- Tecnología para la identificación y funcionamiento del ADN, proteínas y enzimas y como influencian la enfermedad)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.04 -- Biomateriales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.04.05 -- Ética relacionada con la biotecnología médica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.04.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.05.00 -- Otras ciencias médicas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.05.01 -- Ciencia forense</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.05.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.05.02 -- Otras ciencias médicas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.05.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>3.05.03 -- Fonoaudiología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#3.05.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.00.00 -- Ciencias agrícolas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.00 -- Agricultura, Silvicultura, Pesquería</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.01 -- Agricultura</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.02 -- Forestal</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.03 -- Pesquería</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.04 -- Ciencia del suelo</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.05 -- Horticultura, Viticultura</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.06 -- Agronomía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.07 -- Protección y nutrición de las plantas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.01.08 -- Acuicultura</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.01.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.02.00 -- Ciencia animal, Ciencia de productos lácteos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.02.01 -- Ciencia animal, Ciencia de productos lácteos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.02.02 -- Cría</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.02.03 -- Mascotas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.03.00 -- Ciencia veterinaria</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.03.01 -- Ciencia veterinaria</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.04.00 -- Biotecnología agrícola</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.04.01 -- Biotecnología agrícola, Biotecnología alimentaria</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.04.02 -- Tecnología de modificación genética</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.04.03 -- Ética relacionada con la biotecnología agrícola</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.04.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>4.05.00 -- Otras ciencias agrícolas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#4.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.00.00 -- Ciencias sociales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.01.00 -- Psicología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.01.01 -- Psicología (incluye relaciones hombre-máquina)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.01.02 -- Psicología (incluye terapias de aprendizaje, habla, visual y otras discapacidades físicas y mentales)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.02.00 -- Economía, Negocios</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.02.01 -- Economía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.02.02 -- Econometría</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.02.03 -- Relaciones Industriales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.02.04 -- Negocios, Adminsitración</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.02.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.03.00 -- Ciencias de la educación</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.03.01 -- Educación general (incluye capacitación, pedadogía)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.03.02 -- Educacion especial (para estudiantes dotados y aquellos con dificultades del apredizaje)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.03.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.00 -- Sociología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.01 -- Sociología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.02 -- Demografía</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.03 -- Antropología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.04 -- Etnología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.04.05 -- Temas sociales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.04.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.05.00 -- Derecho</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.05.01 -- Derecho</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.05.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.05.02 -- Derecho penal</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.05.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.05.03 -- Criminología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.05.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.06.00 -- Ciencias políticas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.06.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.06.01 -- Ciencia política</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.06.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.06.02 -- Administración pública</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.06.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.06.03 -- Teoría organizacional</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.06.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.07.00 -- Geografía social, Geografía económica</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.07.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.07.01 -- Ciencias ambientales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.07.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.07.02 -- Geografía económica y cultural</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.07.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.07.03 -- Estudios urbanos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.07.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.07.04 -- Planificación del transporte y aspectos sociales del transporte</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.07.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.08.00 -- Comunicación, Medios de comunicación</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.08.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.08.01 -- Periodismo</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.08.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.08.02 -- Ciencias de la Información</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.08.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.08.03 -- Bibliotecología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.08.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.08.04 -- Medios de comunicación, Comunicación socio-cultural</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.08.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.09.00 -- Otras ciencias sociales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.09.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.09.01 -- Interdisciplinariedad</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.09.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>5.09.02 -- Otras ciencias sociales</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#5.09.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.00.00 -- Humanidades</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.00.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.01.00 -- Historia, Arqueología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.01.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.01.01 -- Historia</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.01.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.01.02 -- Arqueología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.01.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.00 -- Lenguas, Literatura</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.01 -- Estudios generales de idiomas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.02 -- Idiomas específicos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.03 -- Estudios de literatura general</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.04 -- Teoría literaria</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.05 -- Literaturas específicas</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.02.06 -- Lingüística</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.02.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.00 -- Filosofía, Ética, Religión</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.01 -- Filosofía </displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.02 -- Historia y filosofía de la ciencia y la tecnología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.04 -- Ética</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.05 -- Teología</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.03.06 -- Estudios religiosos</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.03.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.00 -- Arte</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.01 -- Arte</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.01</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.02 -- Historia del arte</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.02</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.03 -- Diseño arquitectónico</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.03</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.04 -- Artes de la representación (musicología, ciencias del teatro, dramaturgia)</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.04</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.05 -- Estudio del folklore</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.05</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.06 -- Estudios en cine, Estudios en radio, Estudios en televisión</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.06</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.07 -- Música</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.07</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.08 -- Arquitectura y urbanismo</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.08</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.04.09 -- Diseño industrial y otros diseños</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.04.09</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.05.00 -- Otras humanidades</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.05.00</stored-value>
+                        </pair>
+                        <pair>
+                                <displayed-value>6.05.01 -- Otras humanidades</displayed-value>
+                                <stored-value>https://purl.org/pe-repo/ocde/ford#6.05.01</stored-value>
+                        </pair>
+		</value-pairs>
+	</form-value-pairs>
+</input-forms>
