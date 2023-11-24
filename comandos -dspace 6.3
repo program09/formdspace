@@ -1,0 +1,184 @@
+sudo apt update
+sudo apt upgrade
+sudo apt dist-upgrade
+
+sudo apt install openjdk-8-jdk postgresql ant maven
+
+psql -V   	(14.9)
+lsb_release -a 	(22.04.3)
+ant -version 	(1.10.12)
+java -version 	(11.0.20.1)
+mvn -version 	(3.6.3)
+
+sudo mkdir /dspace
+sudo chown (usuario) /dspace
+
+sudo su postgres
+createuser -U postgres -d -P dspace
+
+sudo -u postgres createdb -O dspace dspace -E UNICODE
+
+//dar permisos de sudo
+sudo visudo
+postgres ALL=(ALL:ALL) ALL
+
+
+
+//ver usuarios
+sudo -u postgres psql -c "\du"
+
+
+
+****INSTAL PGADMIN4
+sudo apt update
+sudo apt install curl
+
+sudo curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/pgadmin4.gpg
+
+echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" | sudo tee /etc/apt/sources.list.d/pgadmin4.list
+
+sudo apt update
+sudo apt install pgadmin4
+
+****END
+
+
+
+sudo su postgres
+psql --username=postgres dspace -c "CREATE EXTENSION pgcrypto;"
+exit
+
+
+//modificar archivo
+sudo nano /etc/postgresql/14/main/pg_hba.conf
+
+-> colocar al final: local all dspace md5
+->GUardar
+
+
+sudo /etc/init.d/postgresql restart
+
+
+
+sudo mkdir /build; sudo chmod -R 777 /build; cd /build
+
+/// descargar dspace
+wget https://github.com/DSpace/DSpace/releases/download/dspace-6.3/dspace-6.3-src-release.tar.gz
+
+tar -zxf dspace-6.3-src-release.tar.gz
+cd /build/dspace-6.3-src-release
+
+
+sudo update-alternatives --config java
+
+Opcion: 2
+
+
+
+//modificar 
+sudo nano /build/dspace-6.3-src-release/dspace-api/pom.xml
+
+-> eliminar 
+
+<plugin>
+<groupId>org.codehaus.mojo</groupId>
+<artifactId>buildnumber-maven-plugin</artifactId>
+<version>1.4</version>
+<executions>
+<execution>
+<phase>validate</phase>
+<goals>
+<goal>create</goal>
+</goals>
+</execution>
+</executions>
+</plugin>
+
+_________________
+
+***************CADA VEZ QUE SE HACE CAMBIOS************************
+//compilar cada vez que se hace cambios
+sudo mvn -U package
+
+//instalar el paquete creado
+cd /build/dspace-6.3-src-release/dspace/target/dspace-installer
+sudo ant fresh_install
+
+***************CADA VEZ QUE SE HACE CAMBIOS************************
+
+
+cd /opt
+sudo wget https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.37/bin/apache-tomcat-8.0.37.tar.gz
+
+sudo tar xvzf apache-tomcat-8.0.37.tar.gz
+sudo ln -s apache-tomcat-8.0.37 tomcat
+
+
+
+//modificar
+sudo nano /etc/profile
+
+-> add al final
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export CATALINA_HOME=/opt/tomcat
+
+///copiar archivos de la compilacion -> cada vez que se hace cambios
+sudo cp -r /dspace/webapps/* /opt/tomcat/webapps
+
+sudo /opt/tomcat/bin/startup.sh
+
+
+******* ->  falta crear el usuario: PASO 21
+sudo /dspace/bin/dspace create-administrator
+
+//detener tomcat
+sudo /opt/tomcat/bin/shutdown.sh
+
+
+//MODIFICAR ARCHIVO DE INFO DEL SISTEMA
+cd /build/dspace-6.3-src-release/dspace/config
+nano dspace.cfg
+
+//MODIFICAR USAGE-STATISTICS.CFG
+cd /build/dspace-6.3-src-release/dspace/config/modules
+nano usage-statistics.cfg
+
+
+//VOLVER A COMPILAR
+cd /build/dspace-6.3-src-release
+sudo mvn -U package
+
+cd /build/dspace-6.3-src-release/dspace/target/dspace-installer
+sudo ant update
+
+
+
+sudo rm -r /opt/tomcat/webapps/*
+sudo cp -r /dspace/webapps/* /opt/tomcat/webapps
+sudo /opt/tomcat/bin/startup.sh
+
+
+
+
+
+//********** Para iniciar el programa
+sudo /etc/init.d/postgresql restart
+sudo /opt/tomcat/bin/startup.sh
+
+
+//ACTUALIZAR PAQUETE - AL HACER LA SEGUNDA COMPILACION
+cd /build/dspace-6.3-src-release/dspace/target/dspace-installer
+sudo ant update
+
+
+
+
+
+
+
+
+
+
+
+
+
